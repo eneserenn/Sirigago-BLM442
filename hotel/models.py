@@ -12,11 +12,35 @@ class Category(models.Model):
     description = models.CharField(max_length=200)
     keywords = models.CharField(max_length=200)
     image = models.ImageField(blank=True,upload_to='images/')
-    description = models.CharField(max_length=200, choices=STATUS)
-
+    description = models.CharField(max_length=200)
+    status=models.CharField(max_length=10 , choices=STATUS, default="")
     slug = models.SlugField()
     parent = models.ForeignKey('self', blank=True,null=True,related_name='children', on_delete=models.CASCADE)
     
+    create_at=models.DateTimeField(auto_now_add=True)
+    update_at=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class Product(models.Model):
+    STATUS = (
+        ('True','Evet'),
+        ('False','Hayır'),
+    )
+
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    title = models.CharField(max_length=30, default="")
+    description = models.CharField(max_length=200, default="")
+    keywords = models.CharField(max_length=200, default="")
+    star = models.IntegerField()
+    city = models.CharField(max_length=200, default="")
+    detail = models.TextField()
+    price= models.FloatField()
+    image = models.ImageField(blank=True,upload_to='images/')
+    description = models.CharField(max_length=200, default="")
+    status=models.CharField(max_length=10 , choices=STATUS, default="")
+    detail = models.CharField(max_length=300)
     create_at=models.DateTimeField(auto_now_add=True)
     update_at=models.DateTimeField(auto_now_add=True)
 
