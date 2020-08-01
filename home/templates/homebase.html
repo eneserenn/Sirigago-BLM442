@@ -32,14 +32,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.min.css' %}">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  
+  {% block head %} {% endblock%}
 </head>
- {% block head %} {% endblock head %}
+ 
 <body>
     {% include 'preloader.html' %}
     {% include 'header.html' %}
     {% block slider %}{% endblock  %}
     {% block idk %}{% endblock  %}
+    {% block content %}{% endblock %}
     {% block blog %}{% endblock  %}
     {% include 'footer.html' %}
     {% block foot %}{% endblock  %}

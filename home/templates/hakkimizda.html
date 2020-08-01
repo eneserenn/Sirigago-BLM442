@@ -2,12 +2,13 @@
 {% block head %}
 <link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}' />
 {% endblock %}
-{% block title %}{{setting.title}}{% endblock %}
+{% block title %}Hakkımızda {{setting.company}}{% endblock %}
 {% block keywords %}{{setting.keywords}}{% endblock %}
 {% block description %}{{setting.description}}{% endblock %}
 
-{% block slider %}{% include "slider.html" %}{% endblock %}
-
-{% block idk %}{% include "idk.html" %}{% endblock %}
-
-{% block blog %}{% include "blog.html" %}{% endblock %}
+{% block content %}
+ <hr>
+ <section class="container" style="margin-top:10px;margin-bottom:90px">
+ {{setting.aboutus | safe}}
+   </section>
+{% endblock %}

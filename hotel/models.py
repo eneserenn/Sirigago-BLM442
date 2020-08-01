@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.fields import RichTextUploadingField
+
 
 # Create your models here.
 
@@ -41,7 +43,7 @@ class Product(models.Model):
     image = models.ImageField(blank=True,upload_to='images/')
     description = models.CharField(max_length=200, default="")
     status=models.CharField(max_length=10 , choices=STATUS, default="")
-    detail = models.CharField(max_length=300)
+    detail = RichTextUploadingField()
     create_at=models.DateTimeField(auto_now_add=True)
     update_at=models.DateTimeField(auto_now_add=True)
 
@@ -61,3 +63,4 @@ class Images(models.Model):
     def image_tag(self):
         return mark_safe('<img src="{}" height="100"/>'.format(self.image.url))
     image_tag.short_description = 'Image'
+
