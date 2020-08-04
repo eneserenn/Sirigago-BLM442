@@ -1,11 +1,11 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
-
+from mptt.models import MPTTModel, TreeForeignKey
 
 # Create your models here.
 
-class Category(models.Model):
+class Category(MPTTModel):
     STATUS = (
         ('True','Evet'),
         ('False','Hayır'),
@@ -18,13 +18,20 @@ class Category(models.Model):
     description = models.CharField(max_length=200)
     status=models.CharField(max_length=10 , choices=STATUS, default="")
     slug = models.SlugField()
-    parent = models.ForeignKey('self', blank=True,null=True,related_name='children', on_delete=models.CASCADE)
-    
+    parent = TreeForeignKey('self', blank=True,null=True,related_name='children', on_delete=models.CASCADE)
     create_at=models.DateTimeField(auto_now_add=True)
     update_at=models.DateTimeField(auto_now_add=True)
 
+    class MPTTMeta:
+        order_insertion_by = ['title']
+
     def __str__(self):
-        return self.title
+        full_path = [self.title]
+        k = self.parent
+        while k is not None:
+            full_path.append(k.title)
+            k = k.parent
+        return ' / '.join(full_path[::-1])
 
 class Product(models.Model):
     STATUS = (
@@ -39,7 +46,9 @@ class Product(models.Model):
     star = models.IntegerField()
     city = models.CharField(max_length=200, default="")
     detail = models.TextField()
+    roomtypes = models.CharField(max_length=200, default="")
     price= models.FloatField()
+    slug = models.SlugField()
     image = models.ImageField(blank=True,upload_to='images/')
     description = models.CharField(max_length=200, default="")
     status=models.CharField(max_length=10 , choices=STATUS, default="")

@@ -51,13 +51,26 @@
                                     <li class="active"><a href="/home">Home</a></li>
                                     <li><a href="./rooms.html">Rooms</a></li>
                                     <li><a href="/hakkimizda">About Us</a></li>
-                                    <li><a href="./pages.html">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="./room-details.html">Room Details</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                            <li><a href="#">Family Room</a></li>
-                                            <li><a href="#">Premium Room</a></li>
-                                        </ul>
+                                    <li><a href="./pages.html">Hoteller</a>
+                                    {% load mptt_tags %}
+                                    <ul class="dropdown">
+                                       {% recursetree category %}
+        <li><a href="/room-details.html"> {{ node.title }}</a>
+           
+            
+        </li>
+{% if not node.is_leaf_node %}
+            
+               <ul class="pl-4">  {{ children }} </ul>
+            {% endif %}
+    {% endrecursetree %}
+</ul>
+         
+                               {% comment %} <ul class="dropdown">
+                                        {% for list in category  %}
+                                            <li><a href="./room-details.html">{{list.title}}</a></li>
+                                           {% endfor %}
+                                        </ul> {% endcomment %}
                                     </li>
 
                                     <li><a href="/iletisim">Contact</a></li>
