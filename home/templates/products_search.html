@@ -1,0 +1,30 @@
+{% extends 'homebase.html' %}
+{% block head %}
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}' />
+{% endblock %}
+{% block title %}Arama Sonucu {% endblock %}
+{% block keywords %}{% for rs in products%}{{products.keywords}}{% endfor %}{% endblock %}
+{% block description %}{% for rs in products%}{{products.description}}{% endfor %}{% endblock %}
+
+{% block content %}
+ <div class="container">
+     <div class="row">
+         <table cellpadding="3" width="1200">
+<tr>
+    <th>Image</th>
+    <th>Hotel Name</th>
+    <th>Category</th>
+    <th>Price</th>
+</tr>
+<tr>
+{% for rs in products%}
+    <td><a style="color:black;" href="/product/{{rs.id}}/{{rs.slug}}"><img src="{{rs.image.url}}" alt="" style="width:300px;height=200px"></a></td>
+    <td><h4><a style="color:black;" href="/product/{{rs.id}}/{{rs.slug}}">{{rs.title}}</a></h4></td>
+    <td><a style="color:black;" href="/product/{{rs.id}}/{{rs.slug}}">{{rs.category}}</a></td>
+    <td><h4><a style="color:black;" href="/product/{{rs.id}}/{{rs.slug}}">{{rs.price}}</a></h4></td>
+</tr>
+{% endfor %}
+         </table>
+     </div>
+ </div>
+{% endblock %}

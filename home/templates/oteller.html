@@ -1,0 +1,78 @@
+{% extends 'homebase.html' %}
+{% block head %}
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}' />
+{% endblock %}
+{% block title %}{{categorydata.title}}{% endblock %}
+{% block keywords %}{{categorydata.keywords}}{% endblock %}
+{% block description %}{{categorydata.description}}{% endblock %}
+
+{% block content %}
+{% load static %}
+ <hr>
+ <section class="container" style="margin-top:10px;margin-bottom:90px">
+ <!-- Breadcrumb Section Begin -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>{{categorydata.title}}</h2>
+                        {% comment %} <div class="bt-option">
+                            <a href="./home.html">Home</a>
+                            <span>Rooms</span>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Rooms Section Begin -->
+    <section class="rooms-section spad">
+        <div class="container">
+            <div class="row">
+             {% for pr in products %}
+           
+                <div class="col-lg-4 col-md-6" >
+                    <div class="room-item">
+                        <img style="max-height:150px;min-height:150px;object-fit:cover" src="{{pr.image.url}}" alt="">
+                        <div class="ri-text">
+                            <h4>{{pr.title}}</h4>
+                            <h3>{{pr.price}}<span>/Gecelik</span></h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Şehir:</td>
+                                        <td>{{pr.city}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Star:</td>
+                                        <td>{{pr.star}} Yıldız Kalitesi</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Oda tipleri:</td>
+                                        <td>{{pr.roomtypes}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="/product/{{pr.id}}/{{pr.slug}}/" class="primary-btn">More Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                {% endfor%}
+              
+                <div class="col-lg-12">
+                    <div class="room-pagination">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Rooms Section End -->
+   </section>
+{% endblock %}

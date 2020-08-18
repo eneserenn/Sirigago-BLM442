@@ -6,17 +6,24 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="tn-left">
-                            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                           {% if user.id is not None %}
+                           
+                           <li>Hoşgeldin {{user.first_name}}</li>
+                           <li> <a style="color:black" href="/logout/">Rezervasyonlarım</a></li>
+                           <li> <a style="color:black" href="/logout/">logout</a></li>
+                            {% else %}
+                            <li> <a style="color:black" href="/login/">Login</a></li>
+                            <li> <a style="color:black" href="/signup/">Signup</a></li>
+                            
                         </ul>
-                    </div>
+                        {% endif %}
+                    </div
                     <div class="col-lg-6">
                         <div class="tn-right">
                             <div class="top-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="//{{setting.facebook}}"><i class="fa fa-facebook"></i></a>
+                                <a href="//{{setting.twitter}}"><i class="fa fa-twitter"></i></a>
+                                
                             </div>
                             <a href="#" class="bk-btn">Booking Now</a>
                             <div class="language-option">
@@ -39,7 +46,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="/index.html">
+                            <a href="/home">
                                 <img src="{%static 'img/logo.png'%}" alt="">
                             </a>
                         </div>
@@ -55,14 +62,15 @@
                                     {% load mptt_tags %}
                                     <ul class="dropdown">
                                        {% recursetree category %}
-        <li><a href="/room-details.html"> {{ node.title }}</a>
+        <li><a href="/category/{{node.id}}/{{node.slug}}/" > {{ node.title }}</a>
            
-            
+          
         </li>
-{% if not node.is_leaf_node %}
+  {% if not node.is_leaf_node %}
             
-               <ul class="pl-4">  {{ children }} </ul>
+               <ul  class="pl-4"><li> <a href="/category/{{node.slug}}"> {{ children }}</a></li> </ul>
             {% endif %}
+            
     {% endrecursetree %}
 </ul>
          
@@ -74,11 +82,15 @@
                                     </li>
 
                                     <li><a href="/iletisim">Contact</a></li>
+                                    <form method="post" action="/search/">
+                                    {% csrf_token %}
+                            <div class="nav-right">
+                               <input name="query" class="input"><button class="btn"> <i class="icon_search"></i></button>
+                            </div>
+                            </form>
                                 </ul>
                             </nav>
-                            <div class="nav-right search-switch">
-                                <i class="icon_search"></i>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
