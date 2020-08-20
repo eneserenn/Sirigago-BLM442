@@ -34,6 +34,7 @@ class Reservation(models.Model):
         ('Onaylandı','Onaylandı'),
         ('Beklemede','Beklemede'),
         ('Reddedildi','Reddedildi'),
+        ('Tarih Sonlandı','Tarih Sonlandı'),
     )
     user=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     check_in = models.DateField(default=timezone.now)
@@ -41,7 +42,7 @@ class Reservation(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     kisisayisi=models.IntegerField(blank=False)
     price=models.IntegerField(blank=False)
-    status=models.CharField(max_length=10 , choices=STATUS, default="Beklemede")
+    status=models.CharField(max_length=20 , choices=STATUS, default="Beklemede")
 
     def dondur(self):
         return self.kisisayisi,self.check_in,self.check_out,self.price

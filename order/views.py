@@ -33,7 +33,7 @@ def Reserve(request,id):
             data.price = toplam_odeme
             if kalanoda > 0:
              for db in Reservation.objects.all():
-                if db.product_id == data.product_id and db.check_in>= data.check_in and db.check_out <= data.check_out:
+                if db.product_id == data.product_id and db.check_in >= data.check_in and db.check_out <= data.check_out:
                     return HttpResponse("Bu Tarih aralığı dolu")
                 else:
                     data.save()
@@ -41,7 +41,9 @@ def Reserve(request,id):
                     kalanoda=kalanoda-1
                     t.odasayisi=kalanoda
                     t.save()
+                    messages.success(request, "Rezervasyonlarımdan rezervasyonunuzu kontrol edebilirsiniz.İşlem Başarılı")
                     return HttpResponseRedirect(url)
+                    
             else:
                 
                     messages.warning(request, "Boş odamız Kalmamıştır")

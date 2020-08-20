@@ -47,33 +47,31 @@
             <hr>
             <table>
                <tr>
-                   <th class="text-left">id</th>
-                   <th class="text-left"> check_in</th>
-                   <th class="text-left">check_out</th>
-                   <th class="text-left">price</th>
-                   <th class="text-left">kisisayisi</th>
-                   <th class="text-left">name</th>
-                   <th class="text-left">Durum</th>
+                   <th class="text-left">subject</th>
+                   <th class="text-left"> comment</th>
+                   <th class="text-left">rate</th>
+                   <th class="text-left">create_at</th>
+                   <th class="text-left">ip</th>
+                   <th class="text-left">status</th>
                   
                </tr>
                <tr>
-                {% for rs in orders %}
+                {% for rs in comments %}
                  <tr>
-                 <td>{{rs.id}}</td>
+                 <td>{{rs.subject}}</td>
                
-                 <td>{{rs.check_in}}</td>
+                 <td>{{rs.comment}}</td>
                
-                 <td>{{rs.check_out}}</td>
+                 <td>{{rs.rate}}</td>
                
-                 <td>{{rs.price}}</td>
+                 <td>{{rs.create_at}}</td>
               
-                 <td>{{rs.kisisayisi}}</td>
-                 <td>{{rs.product.title}}</td>
+                 <td>{{rs.ip}}</td>
                  
                  <td>{{rs.status}}</td>
                
                  
-                 <td><a class="btn-default" href="/user/orderdetail">detay</a></td>
+                 <td><a class="btn-default" href="/user/orderdetail"></a></td>
                </tr>
                 {% endfor %}
             </tr>

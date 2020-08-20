@@ -23,7 +23,7 @@ class CategoryAdmin(MPTTModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title' , 'status','category', 'price','image_tag','odasayisi']
-    list_filter = ['price','star']
+    list_filter = ['price','star','odasayisi']
     inlines = [ImagesInline]
     prepopulated_fields = {'slug': ('title',)}
 

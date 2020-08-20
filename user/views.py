@@ -9,7 +9,8 @@ from home.models import UserProfile
 from user.forms import UserUpdateForm,ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from order.models import Reservation
-
+from hotel.models import Product
+from hotel.models import Comments
 
 # Create your views here.
 def index(request):
@@ -64,9 +65,23 @@ def orders(request):
     category= Category.objects.all()
     current_user=request.user
     orders=Reservation.objects.filter(user_id=current_user.id)
+    
     context = {
             'category': category,
             'orders': orders,
         }
 
     return render(request,'user_orders.html',context)
+
+@login_required(login_url='/login')
+def mycomment(request):
+    category= Category.objects.all()
+    current_user=request.user
+    comments=Comments.objects.filter(user_id=current_user.id)
+    
+    context = {
+            'category': category,
+            'comments': comments,
+        }
+
+    return render(request,'my_comments.html',context)

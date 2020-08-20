@@ -17,13 +17,18 @@ from home.models import UserProfile
 def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Product.objects.all()
-    fourludata = Product.objects.all().order_by('?')[1:5]
+    fourludata = Product.objects.filter(odasayisi__gte=1).order_by('?')[0:4]
+    random = Product.objects.filter(odasayisi__lte=10).order_by('?')[0:6]
     category = Category.objects.all()
+    comment = Comments.objects.all()
     context = {'setting': setting,
                'page': 'home',
                'sliderdata': sliderdata,
                'fourludata': fourludata,
-               'category': category}
+               'category': category,
+               'comment': comment,
+               'random':random,
+               }
     return render(request, 'index.html', context)
 
 
