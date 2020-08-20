@@ -10,6 +10,7 @@ from home.forms import SearchForm
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from home.forms import SignUpForm
+from home.models import UserProfile
 # Create your views here.
 
 
@@ -124,7 +125,14 @@ def signup_view(request):
             password= form.cleaned_data.get('password1')
             user = authenticate(username=username , password=password)
             login(request,user)
+            current_user=request.user
+            data=UserProfile()
+            data.user_id=current_user.id
+            data.image="images/users/user.png"
+            data.save()
+            messages.success(request,"Başarılı")
             return HttpResponseRedirect('/')
+
     form = SignUpForm()    
     category = Category.objects.all()
     context = {'category': category,

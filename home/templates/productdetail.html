@@ -85,7 +85,7 @@
                         {% for rs in comments%}
                         <div class="review-item">
                             <div class="ri-pic">
-                                <img src="img/room/avatar/avatar-1.jpg" alt="">
+                                <img src="{{rs.user.userprofile.image.url}}" alt="">
                             </div>
                             <div class="ri-text">
                                 <span>{{rs.create_at}}</span>
@@ -139,32 +139,33 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
+                {% if messages %}
+        {% for message in messages %}
+        <p class="alert alert-dismissable {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+        </p>
+        {% endfor %}
+    {% endif %}
                     <div class="room-booking">
                         <h3>Your Reservation</h3>
-                        <form action="#">
-                            <div class="check-date">
+                        <form action="/reservations/reservations/{{product.id}}" method="post">
+                        {% csrf_token %}
+                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in">
+                                <input name="check_in" type="date"  min="">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
-                                <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out">
+                                <label type="check_out" for="date-out">Check Out:</label>
+                                <input name="check_out" type="date" >
                                 <i class="icon_calendar"></i>
-                            </div>
+                            </div> 
                             <div class="select-option">
-                                <label for="guest">Guests:</label>
-                                <select id="guest">
-                                    <option value="">3 Adults</option>
-                                </select>
+                                <label for="room">Kişi Sayisi:</label>
+                                <input name="kisisayisi"  class="input" type="number" min="1" max="5">
                             </div>
-                            <div class="select-option">
-                                <label for="room">Room:</label>
-                                <select id="room">
-                                    <option value="">1 Room</option>
-                                </select>
-                            </div>
-                            <button type="submit">Check Availability</button>
+                            <button type="submit">Rezervasyon</button>
                         </form>
                     </div>
                 </div>

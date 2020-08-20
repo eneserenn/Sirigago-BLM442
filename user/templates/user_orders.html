@@ -1,0 +1,84 @@
+{% extends 'homebase.html' %}
+{% block head %}
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}' />
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f5f1f1;
+    }
+    .prof{
+        color:black;
+        transition: all .2s ease-in-out; 
+
+    }
+    .prof:hover{
+        color:brown;
+        margin-left: 5px;
+        transform: scale(1.5);
+    }
+    </style>
+{% endblock %}
+{% block title %}{{user.username}} Rezervasyonlarım {% endblock %}
+{% block keywords %}{{setting.keywords}}{% endblock %}
+{% block description %}{{setting.description}}{% endblock %}
+
+{% block content %}
+ <hr>
+ 
+ <section class="container mb-4">
+    
+    <div><h1 >User Panel</h1></div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">{% include "user_panel.html" %}</div>
+        <div class="col-md-8">
+            <h3>User Reservations</h3>
+            <hr>
+            <table>
+               <tr>
+                   <th class="text-left">id</th>
+                   <th class="text-left"> check_in</th>
+                   <th class="text-left">check_out</th>
+                   <th class="text-left">price</th>
+                   <th class="text-left">kisisayisi</th>
+                   <th class="text-left">Durum</th>
+                  
+               </tr>
+               <tr>
+                {% for rs in orders %}
+                 <tr>
+                 <td>{{rs.id}}</td>
+               
+                 <td>{{rs.check_in}}</td>
+               
+                 <td>{{rs.check_out}}</td>
+               
+                 <td>{{rs.price}}</td>
+              
+                 <td>{{rs.kisisayisi}}</td>
+                 
+                 <td>{{rs.status}}</td>
+               
+                 
+                 <td><a class="btn-default" href="/user/orderdetail">detay</a></td>
+               </tr>
+                {% endfor %}
+            </tr>
+                
+            </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

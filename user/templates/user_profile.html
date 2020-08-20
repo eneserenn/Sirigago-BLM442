@@ -1,0 +1,100 @@
+{% extends 'homebase.html' %}
+{% block head %}
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}' />
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f5f1f1;
+    }
+    .prof{
+        color:black;
+        transition: all .2s ease-in-out; 
+
+    }
+    .prof:hover{
+        color:brown;
+        margin-left: 5px;
+        transform: scale(1.5);
+    }
+    </style>
+{% endblock %}
+{% block title %}{{user.username}}{% endblock %}
+{% block keywords %}{{setting.keywords}}{% endblock %}
+{% block description %}{{setting.description}}{% endblock %}
+
+{% block content %}
+ <hr>
+ 
+ <section class="container mb-4">
+    
+    <div><h1 >User Panel</h1></div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">{% include "user_panel.html" %}</div>
+        <div class="col-md-8">
+            <h3>User İnfo</h3>
+            <hr>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">
+                        <a href="/user/update" class=""style="color:orange;margin-right:10px">Update Profile</a>
+                        <a href="/user/password" class="" style="color:orange">Change Password</a>
+                        </th>
+                        <td><img style="height: 150px; width: 150px;" src="{{profile.image.url}}" alt=""></td>
+                    </tr>
+                    <tr>
+                        <th>Name Surname</th>
+                        <td>{{profile.user.first_name}} {{user.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>email</th>
+                        <td>{{profile.user.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>phone</th>
+                        <td>{{profile.phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>address</th>
+                        <td>{{profile.address}}</td>
+                    </tr>
+                    <tr>
+                        <th>city</th>
+                        <td>{{profile.city}}</td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <td>{{profile.country}}</td>
+                    </tr>
+                    </tr>
+                </thead>
+                    <tbody>
+                    <tr>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

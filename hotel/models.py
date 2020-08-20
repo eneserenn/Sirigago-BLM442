@@ -53,6 +53,7 @@ class Product(models.Model):
     city = models.CharField(max_length=200, default="")
     detail = models.TextField()
     roomtypes = models.CharField(max_length=200, default="")
+    odasayisi = models.IntegerField(default=0)
     price= models.FloatField()
     slug = models.SlugField(null=False,unique=True)
     image = models.ImageField(blank=True,upload_to='images/')

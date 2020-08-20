@@ -8,8 +8,8 @@
                         <ul class="tn-left">
                            {% if user.id is not None %}
                            
-                           <li>Hoşgeldin {{user.first_name}}</li>
-                           <li> <a style="color:black" href="/logout/">Rezervasyonlarım</a></li>
+                           <li>Hoşgeldin {{user.first_name}} <img style="height:30px;width:30px;border-radius:50%" src="{{user.userprofile.image.url}}" alt=""></li>
+                           <li> <a style="color:black" href="/user/">Hesabım</a></li>
                            <li> <a style="color:black" href="/logout/">logout</a></li>
                             {% else %}
                             <li> <a style="color:black" href="/login/">Login</a></li>
