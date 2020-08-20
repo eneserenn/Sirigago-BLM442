@@ -16,7 +16,7 @@ from home.models import UserProfile
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    sliderdata = Product.objects.all()
+    sliderdata = Product.objects.all().order_by('?')
     fourludata = Product.objects.filter(odasayisi__gte=1).order_by('?')[0:4]
     random = Product.objects.filter(odasayisi__lte=10).order_by('?')[0:6]
     category = Category.objects.all()

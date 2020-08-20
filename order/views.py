@@ -34,7 +34,7 @@ def Reserve(request,id):
             if kalanoda > 0:
              for db in Reservation.objects.all():
                 if db.product_id == data.product_id and db.check_in >= data.check_in and db.check_out <= data.check_out:
-                    return HttpResponse("Bu Tarih aralığı dolu")
+                    messages.warning(request, "Bu tarih aralığı dolu")
                 else:
                     data.save()
                     t=Product.objects.get(id=data.product_id)
