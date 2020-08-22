@@ -150,8 +150,11 @@ def signup_view(request):
 def faq(request):
     category = Category.objects.all()
     faq = Faq.objects.all()
+    setting = Setting.objects.get(pk=1)
     context = {'category': category,
-               'faq': faq,}
+               'faq': faq,
+               'setting':setting,}
+
     return render(request, 'faq.html', context)
     
 

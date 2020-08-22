@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from order.models import Reservation
 from hotel.models import Product
 from hotel.models import Comments
+from home.models import Setting
 
 # Create your views here.
 def index(request):
@@ -78,10 +79,12 @@ def mycomment(request):
     category= Category.objects.all()
     current_user=request.user
     comments=Comments.objects.filter(user_id=current_user.id)
+    setting= Setting.objects.get(pk=1)
     
     context = {
             'category': category,
             'comments': comments,
+            'setting' : setting,
         }
 
     return render(request,'my_comments.html',context)
