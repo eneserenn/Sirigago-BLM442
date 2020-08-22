@@ -9,17 +9,7 @@
                             <span>About Us</span>
                             <h2>{{setting.title}}<br />{{setting.smptemail}}</h2>
                         </div>
-                        <p class="f-para">KALİTE  POLİTİKAMIZ:
-Hızla gelişen ve farklılaşan otelcilikte sektöründe; sürekli gelişme bilinciyle teknolojiyi yakından takip ederek çevre şartlarını iyi kullanıp, gıda güvenliğini de sağlayıp eğitimli personel ile ekip çalışmalarını ön planda tutarak güleryüz ve güveni müşteri memnuniyetiyle bütünleştirip üstün kalite hizmeti, bir sistem içerisinde planlı ve sürekli olarak sunmak otel politikamızdır.</p>
-                        <p class="s-para">İLKELERİMİZ:
-Gelişen teknolojiden hizmetlerimizde faydalanarak sürekli iyileştirmeyi gerçekleştirmek.
-Çevre şartlarına karşı hassasiyet göstermek.
-Gıda üretimimizde hijyen kurallarına ve gıda güvenliğine hassasiyet göstermek.
-Eğitimli personel ile kaliteli hizmet sunmak.
-Güleryüz ve güveni tüm hizmetlerimizde ön planda tutmak.
-Müşteri memnuniyetinde müşteri beklentilerinin üzerinde hizmet sunmak.
-Yasal şart ve mevzuatları tam olarak karşılamak.
-Üstün kalitede hizmeti ilke olarak benimsemiş bulunmaktayız.</p>
+                        <div height="200px" class="f-para">{{setting.aboutus | safe| slice:":450" }} ..</div>
                         <a href="/hakkimizda" class="primary-btn about-btn">Read More</a>
                     </div>
                 </div>
@@ -84,7 +74,7 @@ Yasal şart ve mevzuatları tam olarak karşılamak.
     <!-- Home Room Section End -->
 
     <!-- Testimonial Section Begin -->
-    <section class="testimonial-section spad">
+    <section class="testimonial-section spad mt-5" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -95,30 +85,42 @@ Yasal şart ve mevzuatları tam olarak karşılamak.
                 </div>
             </div>
             
-            <div class="row">
-            {% for rs in comment  %}
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="testimonial-slider owl-carousel d-flex flex-direction-row align-items-center justify-content-center">
-                        <div class="" style="width: 600px;">
-                        
-                            <p>{{rs.subject}}</p>
-                                
-                            <div class="ti-author">
-                            
-                                <h5>{{rs.comment}}</h5>
-                                <p>{{rs.user.username}}</p>
-                            </div>
-                        <div class="d-flex flex-direction-row align-items-center">
-                           <img style="height: 250px;width: 250px;" src="{{rs.user.userprofile.image.url}}" alt="">
-                            <span>--></span>
-                            <a href="/product/{{rs.product.id}}/{{rs.product.slug}}"><img style="height: 250px;width: 250px;" src="{{rs.product.image.url}}" alt=""></a> 
-                        </div>
-                        
-                        </div>
-                   {% endfor %}
-                    </div>
-                    
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                
+                
+                  
+                  {% for rs in comment  %}
+                  {% if forloop.counter == 1 %}
+                  <div class="carousel-item active text-center">
+                    {% else %}
+                  <div class="carousel-item">
+               {% endif %}
+                  <p style="color:black">{{rs.subject}}</p>
+                  <h3>{{rs.comment}}</h3>
+                  <p>{{rs.user.username}}</p>
+                  <div class="d-flex flex-row justify-content-center align-items-center" >
+                  <img class="" style="width:300px;height:300px" src="{{rs.user.userprofile.image.url}}" alt="Third slide">
+                  <span style="margin:25px;">{{rs.user.username}}   {{rs.product.title}} <br> için yorum yaptı</span>
+                  <div class="d-flex flex-column justify-content-center">
+                  <a href="/product/{{rs.product.id}}/{{rs.product.slug}}"><img class="" style="width:300px;height:300px" src="{{rs.product.image.url}}" alt="Third slide"></a>
+                   <span>{{rs.product.title}}</span>
                 </div>
+            </div>
+                </div>
+                  {% endfor %}
+                  
+                </div>
+                <a class="carousel-control-prev"  href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"><</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a  class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                 <span class="" style="color:black" aria-hidden="true">></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+          
             </div>
         </div>
     </section>
