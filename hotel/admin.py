@@ -10,6 +10,7 @@ from hotel.models import Comments
 
 
 
+
 class ImagesInline(admin.TabularInline):
     model = Images
     extra = 3
@@ -71,8 +72,10 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ['subject','comment','product','user','status']
     list_filter = ['status']
 
+
 admin.site.register(Comments,CommentAdmin)
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Images,ImagesAdmin)
 admin.site.register(Product,ProductAdmin)
+
 

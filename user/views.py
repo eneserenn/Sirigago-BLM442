@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from hotel.models import Category
 from home.models import UserProfile
 from django.contrib import messages
@@ -85,3 +85,19 @@ def mycomment(request):
         }
 
     return render(request,'my_comments.html',context)
+
+@login_required(login_url='/login')
+def orderdelete(request,id):
+    url = request.META.get('HTTP_REFERER')
+    category= Category.objects.all()
+    current_user=request.user
+    orders=Reservation.objects.filter(id=id).delete()
+    return HttpResponseRedirect(url)
+
+@login_required(login_url='/login')
+def commentdelete(request,id):
+    url = request.META.get('HTTP_REFERER')
+    category= Category.objects.all()
+    current_user=request.user
+    orders=Comments.objects.filter(id=id).delete()
+    return HttpResponseRedirect(url)

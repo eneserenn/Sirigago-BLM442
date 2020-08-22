@@ -73,7 +73,7 @@
                  <td>{{rs.status}}</td>
                
                  
-                 <td><a class="btn-default" href="/user/orderdetail"></a></td>
+                 <td><a class="btn-default" href="/user/orderdelete/{{rs.id}}" onclick="return confirm("Emin Misiniz")">İptal Et</a></td>
                </tr>
                 {% endfor %}
             </tr>

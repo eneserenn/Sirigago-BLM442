@@ -11,6 +11,8 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from home.forms import SignUpForm
 from home.models import UserProfile
+from home.models import Faq
+
 # Create your views here.
 
 
@@ -144,3 +146,12 @@ def signup_view(request):
                'form': form,}
 
     return render(request, 'signup.html', context)
+
+def faq(request):
+    category = Category.objects.all()
+    faq = Faq.objects.all()
+    context = {'category': category,
+               'faq': faq,}
+    return render(request, 'faq.html', context)
+    
+
